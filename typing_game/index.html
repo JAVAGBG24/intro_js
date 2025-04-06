@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Speed Typing Game</title>
+  </head>
+  <body>
+    <button id="settings-btn" class="settings-btn" aria-label="Settings">
+      <i class="fas fa-cog"></i>
+    </button>
+
+    <div id="settings" class="settings hide">
+      <form id="settings-form">
+        <div>
+          <label for="difficulty" class="difficulty">Difficulty:</label>
+          <select id="difficulty" aria-label="Select difficulty level">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <!-- Instructions Container -->
+    <div id="instructions-container" class="container">
+      <h2>Speed Typing Game</h2>
+      <div class="instructions">
+        <p>
+          Test your typing speed by typing each displayed word as quickly as
+          possible.
+        </p>
+        <p>The faster you type correctly, the higher your score will be.</p>
+        <ul class="rules">
+          <li>Type the word exactly as shown</li>
+          <li>You gain time with each correct word</li>
+          <li>Different difficulty levels give different time bonuses</li>
+        </ul>
+        <div class="difficulty-info">
+          <p><strong>Easy:</strong> +5 seconds per word</p>
+          <p><strong>Medium:</strong> +3 seconds per word</p>
+          <p><strong>Hard:</strong> +2 seconds per word</p>
+        </div>
+        <button id="start-btn" class="btn">Start Game</button>
+      </div>
+    </div>
+
+    <!-- Game Container -->
+    <div id="game-container" class="container" style="display: none">
+      <h2>Speed Typing</h2>
+      <small>Type the following:</small>
+
+      <h1 id="word"></h1>
+
+      <input
+        type="text"
+        id="text"
+        autocomplete="off"
+        placeholder="Type the word here..."
+        aria-label="Type the displayed word"
+      />
+
+      <p class="time-container">Time left: <span id="time">10s</span></p>
+
+      <p class="score-container">Score: <span id="score">0</span></p>
+
+      <div id="end-game-container" class="end-game-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
