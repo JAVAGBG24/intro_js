@@ -57,6 +57,53 @@ const taskManager = {
     alert(message);
     menu();
   },
+  completeTask: function () {
+    //this.listTasks()
+    let message = "";
+    this.tasks.forEach((task) => {
+      message += `Id: ${task.id}, Description: ${task.description}, 
+        Completed: ${task.completed ? "Yes" : "No"}`;
+    });
+
+    alert(message);
+
+    const id = parseInt(prompt("Enter id of task to complete"));
+
+    const task = this.tasks.find((task) => task.id === id);
+
+    if (!task) {
+      alert("No task found!");
+      menu();
+    }
+
+    task.completed = true;
+    alert("Task marked as completed");
+    menu();
+  },
+  listCompletedTasks: function () {
+    const completedTasks = this.tasks.filter((task) => task.completed);
+
+    if (completedTasks.length === 0) {
+      alert("No completed tasks!");
+      menu();
+    }
+
+    let message = "";
+    completedTasks.forEach((task) => {
+      message += `Id: ${task.id}, Description: ${task.description}\n`;
+    });
+
+    alert(message);
+    menu();
+  },
+  exit: function () {
+    const leave = confirm("Are you sure you want to exit?");
+    if (leave) {
+      window.close();
+    } else {
+      menu();
+    }
+  },
 };
 
 //taskManager.addTask();
@@ -73,8 +120,17 @@ function menu() {
     case 1:
       taskManager.addTask();
       break;
+    case 2:
+      taskManager.completeTask();
+      break;
     case 3:
       taskManager.listTasks();
+      break;
+    case 4:
+      taskManager.listCompletedTasks();
+      break;
+    case 5:
+      taskManager.exit();
       break;
     default:
       alert("Invalid choice");
