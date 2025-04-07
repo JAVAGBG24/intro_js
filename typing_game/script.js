@@ -45,3 +45,65 @@ const words = [
   "loving",
   "north",
 ];
+
+// initialt värde på variabler
+let randomWord;
+let score = 0;
+let time = 10;
+let timeInterval;
+let isPlaying = false;
+
+// hämta sparade inställningar från localStorage
+let difficulty =
+  localStorage.getItem("difficulty") !== null
+    ? localStorage.getItem("difficulty")
+    : "medium";
+
+// visa panelen med difficulty från start
+settings.classList.remove("hide");
+
+difficultySelect.value =
+  localStorage.getItem("difficulty") !== null
+    ? localStorage.getItem("difficulty")
+    : "medium";
+
+if (startDifficultySelect) {
+  localStorage.getItem("difficulty") !== null
+    ? localStorage.getItem("difficulty")
+    : "medium";
+}
+
+// metod för att slumpa fram ett random ord
+function getRandomWord() {
+  const currentWord = randomWord;
+
+  let newWord;
+  do {
+    newWord = words[Math.floor(Math.random() * words.length)];
+  } while (newWord === currentWord && words.length > 1);
+
+  return newWord;
+}
+
+// visa ordet på sidan
+function addWordToDOM() {
+  randomWord = getRandomWord();
+  word.innerHTML = randomWord;
+}
+
+// update score
+
+// update time
+
+// game over funktion
+
+// startar spelet
+
+// restart funktion
+
+// EVENT LISTENERS
+// lägga till event listener som ska kolla ordet vi skriver mot ordet i words array
+
+// lägga till event listener som lyssnar på settings select
+
+// event listener för start knappen
