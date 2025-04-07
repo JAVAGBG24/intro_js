@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // för att DOM ska fatta vilket element vi vill koppla till
   // måste vi skapa en "connection"
   const form = document.getElementById("userForm");
-  const nameInput = document.getElementById("nameInput");
-  const emailInput = document.getElementById("emailInput");
-  const ageInput = document.getElementById("ageInput");
-  const interestInput = document.getElementById("interestInput");
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const ageInput = document.getElementById("age");
+  const interestInput = document.getElementById("interest");
   const showDomBtn = document.getElementById("showDomBtn");
   const resultContainer = document.getElementById("resultContainer");
   const resultContent = document.getElementById("resultContent");
@@ -52,8 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // validera ålder
+    // ÄNDRA
     const age = parseInt(this.value);
-    if (!isNaN(age) && age < 18 && age > 100) {
+    if (!isNaN(age) || age < 18 || age > 100) {
       showError("age-error");
       isValid = false;
     } else {
@@ -71,17 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return isValid;
   }
 
-  // dölj error funktion
-  function hideError(id) {
-    const errorElement = document.getElementById(id);
-    errorElement.style.display = "none";
-
-    // återställ input elementets style
-    const inputId = id.replace("-error", "");
-    const inputElement = document.getElementById(inputId);
-    inputElement.style.borderColor = "#ddd";
-  }
-
   // visa error funktion
   function showError(id) {
     const errorElement = document.getElementById(id);
@@ -91,6 +81,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputId = id.replace("-error", "");
     const inputElement = document.getElementById(inputId);
     inputElement.style.borderColor = "#e74c3c";
+  }
+
+  // dölj error funktion
+  function hideError(id) {
+    const errorElement = document.getElementById(id);
+    errorElement.style.display = "none";
+
+    // återställ input elementets style
+    const inputId = id.replace("-error", "");
+    const inputElement = document.getElementById(inputId);
+    inputElement.style.borderColor = "#ddd";
   }
 
   // funktion för att visa resultat från formulär
@@ -141,10 +142,20 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       form.reset();
 
-      const inputs = form.querySelector("input, select");
-      inputs.forEach((error) => {
-        error.style.display = none;
+      // här hade vi ett fele querySelector!
+      // + namngivningen på element som beor på error metoder
+      // reset alla input + select styles
+      const inputs = form.querySelectorAll("input, select");
+      inputs.forEach((input) => {
+        input.style.borderColor = "#ddd";
       });
+
+      // döljer error
+      const error = document.querySelectorAll(".error");
+      error.forEach((error) => {
+        error.style.display = "none";
+      });
+
       resultContainer.style.display = "block";
     }, 500);
   }
