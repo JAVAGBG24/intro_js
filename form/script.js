@@ -135,8 +135,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // visa reultatet
+    resultContainer.style.display = "block";
 
     // återställa formuläret efter att det skickats in och visats
+    setTimeout(() => {
+      form.reset();
+
+      const inputs = form.querySelector("input, select");
+      inputs.forEach((error) => {
+        error.style.display = none;
+      });
+      resultContainer.style.display = "block";
+    }, 500);
+  }
+
+  function getInterestText(value) {
+    const options = {
+      webdev: "Web Development",
+      design: "UI Design",
+      programming: "Programming",
+      other: "Other",
+    };
+    return options[value] || "";
   }
 
   // lägga till input-events så att vi kan illustrera realtidsvalidering
