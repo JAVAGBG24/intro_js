@@ -79,3 +79,10 @@ button:hover {
   background-color: #f9f9f9;
   border-left: 3px solid #607694;
 }
+
+.highlight {
+  background-color: #fffacd;
+  border-color: #f1c40f;
+  padding: 2px 5px;
+  transition: background-color 0.5s;
+}
