@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Form with DOM and JavaScript</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Interactive Form with DOM and JavaScript</h1>
+
+    <div class="form-container">
+      <form id="userForm">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" placeholder="Please write your name" />
+          <div class="error" id="name-error">Name is required!</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Please write your email"
+          />
+          <div class="error" id="email-error">Email is required!</div>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input
+            type="number"
+            id="age"
+            placeholder="Please write your age"
+            min="18"
+            max="100"
+          />
+          <div class="error" id="age-error">
+            Age needs to be between 18 - 100
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="interest">Interest:</label>
+
+          <select id="interest">
+            <option value="">-- Choose interest --</option>
+            <option value="webdev">Web development</option>
+            <option value="design">UI Design</option>
+            <option value="programming">Programming</option>
+            <option value="other">Other</option>
+          </select>
+
+          <div class="error" id="interest-error">
+            You need choose one interest
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" id="submitBtn">Send</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="result-container" id="resultContainer">
+      <h2>Your info:</h2>
+      <div id="resultContent"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
