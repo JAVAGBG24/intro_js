@@ -103,6 +103,8 @@ function addWordToDOM() {
 
 // EVENT LISTENERS
 
+// kolla input mot slumpade ordet från arrayen
+
 // toggle settings
 
 // uppdatera difficulty
