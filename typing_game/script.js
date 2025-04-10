@@ -98,6 +98,37 @@ function addWordToDOM() {
 // game over funktion
 
 // startar spelet
+function startGame() {
+  // göm instructions
+  if (instructionsContainer) {
+    instructionsContainer.style.display = "none";
+  }
+  gameContainer.style.display = "block";
+
+  // reseta alla variabler
+  score = 0;
+  time = 10;
+
+  // clear timeinterval
+  if (timeInterval) {
+    clearInterval(timeInterval);
+  }
+
+  // starta timeinterval
+  timeInterval = setInterval(1000);
+
+  // lägga till ord i DOM
+  addWordToDOM();
+
+  // fokusera på input direkt
+  text.value = "";
+  text.focus();
+
+  isPlaying = true;
+
+  // göm end game container
+  endgameEl.style.display = "none";
+}
 
 // restart funktion
 
@@ -106,7 +137,28 @@ function addWordToDOM() {
 // kolla input mot slumpade ordet från arrayen
 
 // toggle settings
+settingsBtn.addEventListener("click", function () {
+  settings.classList.toggle("hide");
+
+  if (!settings.classList.contains("hide") && !isPlaying) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+});
 
 // uppdatera difficulty
+settingsForm.addEventListener("change", function (event) {
+  difficulty = event.target.value;
+  localStorage.setItem("difficulty", difficulty);
+});
 
 // lyssna på start
+if (startBtn) {
+  startBtn.addEventListener("click", function () {
+    if (startDifficultySelect) {
+      difficulty = startDifficultySelect.value;
+      difficultySelect.value = difficulty;
+      localStorage.setItem("difficulty", difficulty);
+    }
+    startGame();
+  });
+}
