@@ -102,8 +102,9 @@ function addWordToDOM() {
 // restart funktion
 
 // EVENT LISTENERS
-// lägga till event listener som ska kolla ordet vi skriver mot ordet i words array
 
-// lägga till event listener som lyssnar på settings select
+// toggle settings
 
-// event listener för start knappen
+// uppdatera difficulty
+
+// lyssna på start
