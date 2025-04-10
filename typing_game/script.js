@@ -92,10 +92,43 @@ function addWordToDOM() {
 }
 
 // update score
+function updateScore() {
+  score++;
+  scoreEl.innerHTML = score;
+}
 
 // update time
+function updateTime() {
+  console.log(1);
+  // 1 skrivs ut varje sekund
+  console.log("TIME: " + time);
+
+  // vi vill ta time och dra av ett
+  time--;
+
+  // sen uppdaterar vi time elementet
+  timeEl.innerHTML = time + "s";
+
+  // om vi bara hade sparat här så hade den gått över till negativt tal
+  // och det vill vi inte, så vi behöver cleara när vi når 0
+  if (time === 0) {
+    clearInterval(timeInterval);
+
+    // nu blir det också game over
+    gameOver();
+  }
+}
 
 // game over funktion
+function gameOver() {
+  endgameEl.innerHTML = `
+    <h1>Time ran out!</h1>
+    <p>Your final score is ${score}</p>
+    <button onClick="restartGame()">Play Again</button>`;
+
+  endgameEl.style.display = "flex";
+  isPlaying = false;
+}
 
 // startar spelet
 function startGame() {
@@ -107,7 +140,9 @@ function startGame() {
 
   // reseta alla variabler
   score = 0;
+  scoreEl.innerHTML = "0";
   time = 10;
+  timeEl.innerHTML = "s";
 
   // clear timeinterval
   if (timeInterval) {
@@ -115,7 +150,7 @@ function startGame() {
   }
 
   // starta timeinterval
-  timeInterval = setInterval(1000);
+  timeInterval = setInterval(updateTime, 1000);
 
   // lägga till ord i DOM
   addWordToDOM();
@@ -131,10 +166,38 @@ function startGame() {
 }
 
 // restart funktion
+function restartGame() {
+  endgameEl.style.display = "none";
+  startGame();
+}
 
 // EVENT LISTENERS
 
 // kolla input mot slumpade ordet från arrayen
+text.addEventListener("input", function (event) {
+  if (!isPlaying) return;
+
+  const insertedText = event.target.value;
+
+  if (insertedText === randomWord) {
+    addWordToDOM();
+    updateScore();
+
+    // clear input fält
+    event.target.value = "";
+
+    // hanter tiden baserat på difficulty
+    if (difficulty === "hard") {
+      time += 2;
+    } else if (difficulty === "medium") {
+      time += 3;
+    } else {
+      time += 5;
+    }
+
+    updateTime();
+  }
+});
 
 // toggle settings
 settingsBtn.addEventListener("click", function () {
@@ -149,6 +212,10 @@ settingsBtn.addEventListener("click", function () {
 settingsForm.addEventListener("change", function (event) {
   difficulty = event.target.value;
   localStorage.setItem("difficulty", difficulty);
+
+  if (startDifficultySelect && !isPlaying) {
+    startDifficultySelect.value === difficulty;
+  }
 });
 
 // lyssna på start
