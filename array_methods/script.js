@@ -27,8 +27,15 @@ async function getRandomUser() {
     money: Math.floor(Math.random() * 1000000),
   };
 
-  //addData(newUser);
-  userData.push(newUser);
+  addData(newUser);
+  // userData.push(newUser);
+}
+
+// helper function
+function addData(obj) {
+  userData.push(obj);
+
+  updateDOM();
 }
 
 // double everyones money
@@ -38,6 +45,7 @@ function doubleMoney() {
   });
 
   // uppdatera DOM
+  updateDOM();
 }
 
 // sort by richest
@@ -45,6 +53,7 @@ function sortByRichest() {
   userData.sort((a, b) => b.money - a.money);
 
   // uppdatera DOM
+  updateDOM();
 }
 
 // toggle millionaires
@@ -54,12 +63,30 @@ function showMillionaires() {}
 function calculateWealth() {}
 
 // add a new user to the data array
-function addData(obj) {}
+//function addData(obj) {}
 
-function updateDOM(providedData = userData) {}
+function updateDOM(providedData = userData) {
+  // clear main div
+  main.innerHTML = "<h2><strong>Person</strong> Wealth</h2>";
+
+  providedData.forEach((person) => {
+    // create new element for each person
+    const element = document.createElement("div");
+
+    // add a class to the div
+    element.classList.add("person");
+    element.innerHTML = `<strong>${person.name}</strong> ${formatMoney(
+      person.money
+    )}`;
+
+    // append to main element
+    main.appendChild(element);
+  });
+}
 
 function formatMoney(number) {
   return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 }
 
 // EVENT LISTENERS
+addUserBtn.addEventListener("click", getRandomUser);
